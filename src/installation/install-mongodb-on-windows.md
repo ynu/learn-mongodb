@@ -78,6 +78,10 @@ To begin using MongoDB, see Getting Started with MongoDB. Also consider the Prod
 
 Later, to stop MongoDB, press Control+C in the terminal where the mongod instance is running.
 
+## 下载地址
+
+如果官方网站不能下载，可以[从学校cdn网站下载](http://cdn.ynu.edu.cn/software/mongodb/mongodb-win32-i386-3.2.4-signed.msi)
+
 ## Configure a Windows Service for MongoDB
 
 ## Manually Create a Windows Service for MongoDB

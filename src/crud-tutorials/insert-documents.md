@@ -131,6 +131,7 @@ You can also initialize an ordered operations builder; see db.collection.initial
 ### Add insert operations to the bulk object.
 Add two insert operations to the bulk object using the Bulk.insert() method.
 
+```
 bulk.insert(
    {
      item: "BE10",
@@ -147,12 +148,18 @@ bulk.insert(
      category: "houseware"
    }
 );
+```
+
 ### Execute the bulk operation.
 Call the execute() method on the bulk object to execute the operations in its list.
 
+```
 bulk.execute();
+```
+
 The method returns a BulkWriteResult object with the status of the operation. A successful insert of the documents returns the following object:
 
+```
 BulkWriteResult({
    "writeErrors" : [ ],
    "writeConcernErrors" : [ ],
@@ -163,6 +170,8 @@ BulkWriteResult({
    "nRemoved" : 0,
    "upserted" : [ ]
 })
+```
+
 The nInserted field specifies the number of documents inserted. If the operation encounters an error, the BulkWriteResult object will contain information regarding the error.
 
 ## Additional Examples and Methods

@@ -1,7 +1,7 @@
 # MongoDB CRUD 操作进阶
 
-* [Insert Documents](insert-documents.md)
-* [Query Documents](query-documents.md)
+* [文档插入](insert-documents.md)
+* [文档查询](query-documents.md)
 * [Modify Documents]()
 * [Remove Documents]()
 * [Limit Fields to Return from a Query]()

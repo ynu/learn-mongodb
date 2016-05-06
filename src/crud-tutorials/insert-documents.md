@@ -58,6 +58,7 @@ The document you inserted should return.
 }
 
 ```
+
 The returned document shows that MongoDB added an _id field to the document. If a client inserts a document that does not contain the _id field, MongoDB adds the field with the value set to a generated ObjectId. The ObjectId values in your documents will differ from the ones shown.
 
 ## 插入一组文档

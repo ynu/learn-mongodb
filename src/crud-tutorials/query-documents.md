@@ -531,11 +531,11 @@ The following operation queries the inventory collection for documents where the
 
 ```
 db.inventory.find( {
-                     qty: { $all: [
-                                    { "$elemMatch" : { size: "M", num: { $gt: 50} } },
-                                    { "$elemMatch" : { num : 100, color: "green" } }
-                                  ] }
-                   } )
+   qty: { $all: [
+      { "$elemMatch" : { size: "M", num: { $gt: 50} } },
+      { "$elemMatch" : { num : 100, color: "green" } }
+    ] }
+ } )
 ```
 
 The query returns the following documents:

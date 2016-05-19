@@ -185,8 +185,115 @@ The nModified of 0 specifies that no existing documents were updated.
 
 The `_id` field shows the generated `_id` field for the added document.
 
-## Additional Examples and Methods
+## 使用修改器（modifiers)
 
-For more examples, see Update examples in the db.collection.update() reference page.
+### 使用修改器的一般形式
 
-The db.collection.findAndModify() and the db.collection.save() method can also modify existing documents or insert a new one. See the individual reference pages for the methods for more information and examples.
+```javascript
+{
+   <operator1>: { <field1>: <value1>, ... },
+   <operator2>: { <field2>: <value2>, ... },
+   ...
+}
+```
+
+### Fields
+#### $inc
+
+- The $inc operator increments a field by a specified value and has the following form:
+  ```javascript
+  { $inc: { <field1>: <amount1>, <field2>: <amount2>, ... } }
+  ```
+- To specify a <field> in an embedded document or in an array, use dot notation.
+
+##### 示例
+原文档：
+```javascript
+{
+  _id: 1,
+  sku: "abc123",
+  quantity: 10,
+  metrics: {
+    orders: 2,
+    ratings: 3.5
+  }
+}
+```
+
+更新语句：
+```javascript
+db.products.update(
+   { sku: "abc123" },
+   { $inc: { quantity: -2, "metrics.orders": 1 } }
+)
+```
+
+结果：
+```javascript
+{
+   "_id" : 1,
+   "sku" : "abc123",
+   "quantity" : 8,
+   "metrics" : {
+      "orders" : 3,
+      "ratings" : 3.5
+   }
+}
+```
+
+#### $mul
+Multiplies the value of the field by the specified amount.
+
+#### $rename
+Renames a field.
+
+#### $setOnInsert
+Sets the value of a field if an update results in an insert of a document. Has no effect on update operations that modify existing documents.
+#### $set
+Sets the value of a field in a document.
+#### $unset
+Removes the specified field from a document.
+#### $min
+- Only updates the field if the specified value is less than the existing field value.
+
+##### 示例
+
+原文档：
+```javascript
+{ _id: 1, highScore: 800, lowScore: 200 }
+```
+更新语句：
+```javascript
+db.scores.update( { _id: 1 }, { $min: { lowScore: 150 } } )
+```
+结果：
+```javascript
+{ _id: 1, highScore: 800, lowScore: 150 }
+```
+
+#### $max
+Only updates the field if the specified value is greater than the existing field value.
+
+#### $currentDate
+- Sets the value of a field to current date, either as a Date or a Timestamp.
+- 用法：`{ $currentDate: { <field1>: <typeSpecification1>, ... } }`。`<typeSpecification1>`可以是：
+  - `true`，表示设置的值是`Date`类型
+  - ` { $type: "timestamp" }`或`{ $type: "date" } `
+
+##### 示例
+
+```javascript
+db.users.update(
+   { _id: 1 },
+   {
+     $currentDate: {
+        lastModified: true,
+        "cancellation.date": { $type: "timestamp" }
+     },
+     $set: {
+        status: "D",
+        "cancellation.reason": "user request"
+     }
+   }
+)
+```

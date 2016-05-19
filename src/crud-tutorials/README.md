@@ -2,8 +2,8 @@
 
 * [文档插入](insert-documents.md)
 * [文档查询](query-documents.md)
-* [Modify Documents]()
-* [Remove Documents]()
+* [文档更新](modify-documents.md)
+* [Remove Documents](remove-documents.md)
 * [Limit Fields to Return from a Query]()
 * [Limit Number of Elements in an Array after an Update]()
 * [Iterate a Cursor in the mongo Shell]()

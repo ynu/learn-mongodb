@@ -185,9 +185,9 @@ The nModified of 0 specifies that no existing documents were updated.
 
 The `_id` field shows the generated `_id` field for the added document.
 
-## 使用修改器（modifiers)
+## 使用更新操作符（Update Operators)
 
-### 使用修改器的一般形式
+### 使用操作符的一般形式
 
 ```javascript
 {
@@ -297,3 +297,71 @@ db.users.update(
    }
 )
 ```
+
+### 数组
+#### $
+- 用作位置标识符，标记`update`方法的查询条件中匹配的第一个元素；
+- 一般用法：
+  ```
+  db.collection.update(
+     { <array>: value ... },
+     { <update operator>: { "<array>.$" : value } }
+  )
+```
+
+##### 示例
+源文档：
+```
+{ "_id" : 1, "grades" : [ 80, 85, 90 ] }
+{ "_id" : 2, "grades" : [ 88, 90, 92 ] }
+{ "_id" : 3, "grades" : [ 85, 100, 90 ] }
+```
+更新语句：
+```javascript
+db.students.update(
+   { _id: 1, grades: 80 },
+   { $set: { "grades.$" : 82 } }
+)
+```
+
+#### $addToSet
+Adds elements to an array only if they do not already exist in the set.
+
+##### 示例
+```javascript
+db.test.update(
+   { _id: 1 },
+   { $addToSet: {letters: [ "c", "d" ] } }
+)
+```
+
+#### $pop
+移除数组的第一个或最后一个元素
+
+##### 示例
+移除第一个元素：
+```javascript
+db.students.update(
+  { _id: 1 },
+  { $pop: { scores: -1 } }
+)
+```
+#### $pullAll
+Removes all matching values from an array.
+#### $pull
+Removes all array elements that match a specified query.
+#### $pushAll
+Deprecated. Adds several items to an array.
+#### $push
+Adds an item to an array.
+
+### Modifiers
+
+#### $each
+Modifies the $push and $addToSet operators to append multiple items for array updates.
+#### $slice
+Modifies the $push operator to limit the size of updated arrays.
+#### $sort
+Modifies the $push operator to reorder documents stored in an array.
+#### $position
+Modifies the $push operator to specify the position in the array to add elements.

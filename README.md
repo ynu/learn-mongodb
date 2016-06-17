@@ -80,4 +80,6 @@
     - [修改用户密码和自定义数据]()
     - [启用身份认证](enable-authentication.md)
 - [聚合](src/aggregation/README.md)
+    - [聚合函数](src/aggregation/single-purpose-aggregation.md)
     - [聚合管道](src/aggregation/aggregation-pipeline.md)
+    - [MapReduce](src/aggregation/map-reduce.md)
